@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>THEATRIX</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/css/autoComplete.min.css">
+    <link rel="shortcut icon" type="image/x-icon" href="https://tanisha-byte.github.io/hostedAssets/Red%20Bordered%20Personal%20Logo.png"/>
+   
+    <meta name="description" content="Enter. Discover. Stream." />
+    <meta name="keywords" content="theatrix, anonymous, app, movie, recommendations, iphone, ios, android, google, play" />
+    <meta name="robots" content="index" />
+    <meta name="language" content="en" />
+    <meta itemprop="name" content="THEATRIX">
+    <meta itemprop="description" content="Enter, discover see the recommendations and watch movies.">
+    <!-- Open Graph general (Facebook, Pinterest & Google+) -->
+    <meta name="og:title" content="THEATRIX">
+    <meta name="og:description" content="Enter, discover see the recommendations and watch movies.">
+    <meta name="og:site_name" content="THEATRIX">
+    <meta name="og:type" content="website">
+    <script type="text/javascript">
+    var films = {{suggestions|tojson}};
+  </script>
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+body{
+  margin:0;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  background-color: whitesmoke;
+  position: -webkit-sticky;
+  padding:0;
+  background-image:url('https://tanisha-byte.github.io/hostedAssets/Group%203.png');
+  background-size: contain;
+
+}
+
+#popular{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 2vw;
+  line-height: .8;
+  text-align: center;
+  color: rgb(142, 12, 22);
+}
+
+#autoComplete {
+  background-position: 98% ;
+}
+
+figure {
+  margin: 0;
+}
+
+img {
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+}
+.movies {
+  display: grid;
+  grid-gap: 3em 2em;
+  grid-template-columns: repeat(auto-fill, minmax(12em, 1fr));
+  list-style: none;
+  margin: 1.5em;
+  padding: 20px;
+}
+
+.movie__figure {
+  position: relative;
+}
+
+.movie__poster {
+  -webkit-box-shadow: 0 0 1em rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 1em rgba(0, 0, 0, 0.1);
+  margin-bottom: 0.8em;
+}
+
+.movie__vote {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: rgb(142, 12, 22);
+  color: #fff;
+  border-radius: 50%;
+  -webkit-box-shadow: 0 0 1em rgba(0, 0, 0, .25);
+          box-shadow: 0 0 1em rgba(0, 0, 0, .25);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 2.25em;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 0.5em;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 75%;
+  -webkit-transform: translateX(50%);
+          transform: translateX(50%);
+  width: 2.25em;
+}
+
+.movie__title {
+  font-size: 14px;
+  font-size: 0.875rem;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  color: rgb(142, 12, 22);;
+  font-weight: 400;
+  margin: 0;
+}
+:root {
+  font-size: 20px;
+}
+@media screen and (max-width: 730px) {
+  :root {
+    font-size: 18px;
+  }
+}
+@media screen and (max-width: 540px) {
+  :root {
+    font-size: 16px;
+  }
+}
+@media screen and (max-width: 465px) {
+  :root {
+    font-size: 12px;
+  }
+}
+.wrapper {
+  height: inherit;
+  width: inherit;
+  margin: 0 auto;
+  padding: 0;
+  display: -webkit-box;
+  display: flex;
+  flex-wrap: wrap;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+}
+
+.card {
+  width: 14rem;
+  height: 8rem;
+  margin: 1em;
+  background: #aaa;
+  background-size: cover;
+  background-position: center;
+  border-radius: .15em;
+  box-shadow: 0em 0em 1em rgba(0, 0, 0, 0.2);
+  position: relative;
+  color: #fff;
+  padding: 0em 3em 1.5em 3em;
+  overflow: hidden;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: start;
+  justify-content: start;
+  -webkit-box-align: end;
+  align-items: flex-end;
+  -webkit-transition: all 0.4s ease-in;
+  transition: all 0.4s ease-in;
+}
+.card:hover * {
+  cursor: pointer;
+}
+.card:hover .card__content {
+  font-size: 1rem;
+}
+.card:hover .card__number {
+  opacity: 1;
+  -webkit-transform: translateY(0em);
+          transform: translateY(0em);
+}
+.card:hover:before {
+  left: 0em;
+}
+.card:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -42em;
+  height: 100%;
+  width: 100%;
+  background: -webkit-gradient(linear, left top, right top, color-stop(46%, rgba(255, 63, 63, 0.489)), to(rgba(137, 19, 19, 0.685))));
+  background: linear-gradient(90deg, rgba(255, 63, 63, 0.489) 46%, rgba(137, 19, 19, 0.685) 100%);
+  z-index: 4;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+
+.card__overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(142, 12, 23, 0.088);
+  z-index: 3;
+}
+
+.card__content {
+
+  position: relative;
+  font-size: 0.5rem;
+  z-index: 5;
+  -webkit-transition: all 0.3s 0.2s ease-in-out;
+  transition: all 0.3s 0.2s ease-in-out;
+  
+}
+
+.card__content span,
+.card__content button {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 14px;
+  padding: 0%;
+  
+}
+
+.card__title {
+  font-size: 1.5em;
+}
+
+
+.card__number {
+  position: absolute;
+  top: -.09em;
+  right: .154em;
+  font-size: 3em;
+  font-weight: bold;
+  z-index: 7;
+  opacity: 0;
+  -webkit-transform: translateY(0.24em);
+  transform: translateY(0.24em);
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.wrap{
+  align-items: center;
+  color: rgb(142, 12, 22);
+  padding-top: 10px;
+}
+
+.titlehead{
+  position: fixed;
+  top: 3;
+  left: calc(100% - 80px);
+  z-index: 10;
+  list-style-type: none;
+}
+
+h3{
+  left: 5;
+  color: rgb(142, 12, 22);
+  padding-left: 25px;
+}
+
+.anchor a{
+  text-decoration: none;
+}
+
+.txt-rotate{
+  text-align: center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 500;
+  font-weight: 3em;
+  color: rgb(142, 12, 22);
+}
+
+footer,.footer, .footer a{
+    text-decoration: none;
+    text-align: center;
+    left: 50%;
+    color: rgb(142, 12, 22);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-bottom: 17px;
+    padding-bottom: 8px;
+    font-size: small;
+  }
+
+</style>
+</head>
+<body>
+
+  
+  <nav>
+    <ul><div class="titlehead">
+      <li><a href="\"><img src="https://tanisha-byte.github.io/hostedAssets/Red%20Bordered%20Personal%20Logo.png" height="50px" width="50px"></a></li></div></ul>
+      
+      <div class="anchor"><a href="\"><h3>THEATRIX</h3></a></div>   
+  </nav>
+  
+
+  <!--rotating text-->
+  <center>
+    <h1 class="txt-rotate" data-period="1500" data-rotate='[ "Enter.", "Discover.", "Stream.", "Enter. Discover. Stream."]'>
+    </h1>
+  </center>
+
+
+ <!--search bar-->
+<center>
+<div class="wrap" >
+   <div>
+   <form class="search" action="{{ url_for('main') }}"  method="POST">
+       <input type="text" class="searchTerm" id="autoComplete" autocomplete="on" name="movie_name" placeholder="Enter full movie name">
+       <button class="searchButton" type="submit"  value="Submit">
+       </button>
+   </form>
+    <br>
+ </div>
+</div>
+</center>
+
+<!--section 1-->
+<h3 id="popular">Movies you may like</h3>
+<div class="wrapper" >
+  <!--movie cards-->
+  <div class="card" id="image1">
+    <div class="card__overlay"></div>
+    <div class="card__content"><span class="card__title">{{movie_names[0]}}</span><br><span>{{movie_date[0]}}</span>
+    </div><span class="card__number">01</span>
+  </div>
+
+  <div class="card" id="image2">
+    <div class="card__overlay"></div>
+    <div class="card__content"><span class="card__title">{{movie_names[1]}}</span><br><span>{{movie_date[1]}}</span>
+    </div><span class="card__number">02</span>
+  </div>
+
+  <div class="card" id="image3">
+    <div class="card__overlay"></div>
+    <div class="card__content"><span class="card__title">{{movie_names[2]}}</span><br><span>{{movie_date[2]}}</span>
+    </div><span class="card__number">03</span>
+  </div>
+
+  <div class="card" id="image5">
+    <div class="card__overlay"></div>
+    <div class="card__content"><span class="card__title">{{movie_names[4]}}</span><br><span>{{movie_date[4]}}</span>
+    </div><span class="card__number">04</span>
+  </div>
+
+  <div class="card" id="image6">
+    <div class="card__overlay"></div>
+    <div class="card__content"><span class="card__title">{{movie_names[5]}}</span><br><span>{{movie_date[5]}}</span>
+    </div><span class="card__number">05</span>
+  </div>
+
+  <div class="card" id="image7">
+    <div class="card__overlay"></div>
+    <div class="card__content"><span class="card__title">{{movie_names[6]}}</span><br><span>{{movie_date[6]}}</span>
+    </div><span class="card__number">06</span>
+  </div>
+
+  <div class="card" id="image4">
+    <div class="card__overlay"></div>
+    <div class="card__content"><span class="card__title">{{movie_names[3]}}</span><br><span>{{movie_date[3]}}</span>
+    </div><span class="card__number">07</span>
+  </div>
+</div>
+
+<!--section2-->
+  <h3 id="popular">Popular Movies</h3>
+  <div id="root"></div>
+
+<!--javascript-->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.5.10/prop-types.min.js'></script>
+<script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/js/autoComplete.min.js"></script>
+<script type="text/javascript" src="{{url_for('static', filename='autocomplete.js')}}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="{{url_for('static', filename='recommend.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='script.js')}}"></script>
+<script>
+  
+  //rotating text
+  var txtRotate=function(t,e,i)
+  {
+    this.toRotate=e,this.el=t,this.loopNum=0,this.period=parseInt(i,10)||2e3,this.txt="",this.tick(),this.isDeleting=!1
+  };
+  txtRotate.prototype.tick=function(){
+    var t=this.loopNum%this.toRotate.length,e=this.toRotate[t];this.isDeleting?this.txt=e.substring(0,this.txt.length-1):this.txt=e.substring(0,this.txt.length+1),this.el.innerHTML='<span class="wraps">'+this.txt+"</span>";var i=this,s=200-100*Math.random();this.isDeleting&&(s/=2),this.isDeleting||this.txt!==e?this.isDeleting&&""===this.txt&&(this.isDeleting=!1,this.loopNum++,s=500):(s=this.period,this.isDeleting=!0),setTimeout(function(){i.tick()},s)},window.onload=function(){for(var t=document.getElementsByClassName("txt-rotate"),e=0;e<t.length;e++){var i=t[e].getAttribute("data-rotate"),s=t[e].getAttribute("data-period");i&&new txtRotate(t[e],JSON.parse(i),s)}var o=document.createElement("style");o.type="text/css",o.innerHTML=".txt-rotate > .wraps { border-right: 0.08em solid #909090}",document.body.appendChild(o)};
+
+    //fetching posters using tmdb api key
+  fetch("https://api.themoviedb.org/3/movie/"+{{movieid[0]}}+"?api_key=57f1a083cea8f2f11bf3bcef97c86730&language=en-US")
+    .then((response) => response.json())
+    .then((data) => {
+    const value = data.poster_path;
+    //Apply HTML src
+    var urlString = "url('https://image.tmdb.org/t/p/original" + value + " ')";
+    document.getElementById('image1').style.backgroundImage = urlString;
+    document.getElementById('image1').style.backgroundRepeat = "no-repeat";
+    document.getElementById('image1').style.backgroundSize = "cover";
+    });
+
+  fetch("https://api.themoviedb.org/3/movie/"+{{movieid[1]}}+"?api_key=57f1a083cea8f2f11bf3bcef97c86730&language=en-US")
+    .then((response) => response.json())
+    .then((data) => {
+    const value = data.poster_path;
+    //Apply HTML src
+    var urlString = "url('https://image.tmdb.org/t/p/original" + value + " ')";
+    document.getElementById('image2').style.backgroundImage = urlString;
+    document.getElementById('image2').style.backgroundRepeat = "no-repeat";
+    document.getElementById('image2').style.backgroundSize = "cover";
+    });
+
+  fetch("https://api.themoviedb.org/3/movie/"+{{movieid[2]}}+"?api_key=57f1a083cea8f2f11bf3bcef97c86730&language=en-US")
+    .then((response) => response.json())
+    .then((data) => {
+    const value = data.poster_path;
+    //Apply HTML src
+    var urlString = "url('https://image.tmdb.org/t/p/original" + value + " ')";
+    document.getElementById('image3').style.backgroundImage = urlString;
+    document.getElementById('image3').style.backgroundRepeat = "no-repeat";
+    document.getElementById('image3').style.backgroundSize = "cover";
+    });
+
+  fetch("https://api.themoviedb.org/3/movie/"+{{movieid[4]}}+"?api_key=57f1a083cea8f2f11bf3bcef97c86730&language=en-US")
+    .then((response) => response.json())
+    .then((data) => {
+    const value = data.poster_path;
+    //Apply HTML src
+    var urlString = "url('https://image.tmdb.org/t/p/original" + value + " ')";
+    document.getElementById('image5').style.backgroundImage = urlString;
+    document.getElementById('image5').style.backgroundRepeat = "no-repeat";
+    document.getElementById('image5').style.backgroundSize = "cover";
+    });
+
+  fetch("https://api.themoviedb.org/3/movie/"+{{movieid[3]}}+"?api_key=57f1a083cea8f2f11bf3bcef97c86730&language=en-US")
+    .then((response) => response.json())
+    .then((data) => {
+    const value = data.poster_path;
+    //Apply HTML src
+    var urlString = "url('https://image.tmdb.org/t/p/original" + value + " ')";
+    document.getElementById('image4').style.backgroundImage = urlString;
+    document.getElementById('image4').style.backgroundRepeat = "no-repeat";
+    document.getElementById('image4').style.backgroundSize = "cover";
+    });
+
+  fetch("https://api.themoviedb.org/3/movie/"+{{movieid[5]}}+"?api_key=57f1a083cea8f2f11bf3bcef97c86730&language=en-US")
+    .then((response) => response.json())
+    .then((data) => {
+    const value = data.poster_path;
+    //Apply HTML src
+    var urlString = "url('https://image.tmdb.org/t/p/original" + value + " ')";
+    document.getElementById('image6').style.backgroundImage = urlString;
+    document.getElementById('image6').style.backgroundRepeat = "no-repeat";
+    document.getElementById('image6').style.backgroundSize = "cover";
+    });
+
+  fetch("https://api.themoviedb.org/3/movie/"+{{movieid[6]}}+"?api_key=57f1a083cea8f2f11bf3bcef97c86730&language=en-US")
+    .then((response) => response.json())
+    .then((data) => {
+    const value = data.poster_path;
+    //Apply HTML src
+    var urlString = "url('https://image.tmdb.org/t/p/original" + value + " ')";
+    document.getElementById('image7').style.backgroundImage = urlString;
+    document.getElementById('image7').style.backgroundRepeat = "no-repeat";
+    document.getElementById('image7').style.backgroundSize = "cover";
+    });
+
+</script>
+
+<!--footer-->
+<footer>
+  <p> Designed by <a class="footer" href="https://www.linkedin.com/in/tanisha-sharma07/">Tanisha Sharma</a></p>
+</footer>
+
+</body>
+</html>
