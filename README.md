@@ -7,7 +7,6 @@ The folders are present in the <b>MASTER</b> branch.
 <ul>
   <li>Theatrix: Consists of home page, recommendations page, error page, test.</li>
   <li>env: Virtual environment</li>
-  <li>.idea: Misc files</li>
  </ul>
 
  <h1>Installation</h1>
