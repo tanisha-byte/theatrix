@@ -3,6 +3,7 @@ The project aims to recommend movies based on the input of the user. The project
 <br><br>
 The languages used for development are- HTML/CSS, JavaScript, Python (Flask Framework).<br><br>
 <h1>Folders</h1>
+The folders are present in the <b>MASTER</b> branch.
 <ul>
   <li>Theatrix: Consists of home page, recommendations page, error page, test.</li>
   <li>env: Virtual environment</li>
